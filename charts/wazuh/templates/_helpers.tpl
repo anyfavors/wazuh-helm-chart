@@ -23,6 +23,11 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+{{- define "wazuh.isVersionGte412" -}}
+{{- $v := trim .Values.wazuh.images.tag " " -}}
+{{- if semverCompare ">=4.12.0" $v }}true{{ else }}false{{ end }}
+{{- end -}}
+
 {{- define "wazuh.dashboard.config"}}
 server.host: 0.0.0.0
 server.port: {{ .Values.dashboard.service.httpPort }}
@@ -395,6 +400,9 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 #
 # This file will not be overwritten during upgrades.
 vulnerability-detection.disable_scan_manager=0
+{{- if .Values.analysisd.compatArConf }}
+analysisd.ar_disabled=1
+{{- end }}
 {{- end }}
 
 {{/* Snippet for the configuration file used by wazuh worker */}}
@@ -757,6 +765,9 @@ vulnerability-detection.disable_scan_manager=0
 #
 # This file will not be overwritten during upgrades.
 vulnerability-detection.disable_scan_manager=0
+{{- if .Values.analysisd.compatArConf }}
+analysisd.ar_disabled=1
+{{- end }}
 {{- end }}
 
 {{- define "wazuh.indexer.opensearchConfig" }}
