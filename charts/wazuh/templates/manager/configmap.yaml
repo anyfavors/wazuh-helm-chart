@@ -17,11 +17,4 @@ data:
     {{- tpl .Values.wazuh.worker.conf . | indent 2 }}
   worker_local_internal_options.conf: |
     {{- tpl .Values.wazuh.worker.localInternalOptions . | indent 2 }}
-  ar.conf: |
-    <active-response>
-      <command>firewall-drop</command>
-      <location>local</location>
-      <level>6</level>
-      <timeout>600</timeout>
-    </active-response>
 
