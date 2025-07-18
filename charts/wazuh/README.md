@@ -37,7 +37,7 @@ HTTPS communication between components is enabled by default and set up using se
 
 The [`ossec.conf`](http://documentation.wazuh.com/current/user-manual/reference/ossec-conf/) file is the main configuration file on the Wazuh manager. It is created on the `_helpers.tpl` file and passed via `values.yaml`.
 
-This configuration can be replaced, by setting a different value for `wazuh.master.conf` and `waazuh.worker.conf` in the `values.yaml` file. Or extra parameters can be appended to the configuration file by setting the `wazuh.master.extraConf` and `wazuh.worker.extraConf` values.
+This configuration can be replaced, by setting a different value for `wazuh.master.conf` and `wazuh.worker.conf` in the `values.yaml` file. Or extra parameters can be appended to the configuration file by setting the `wazuh.master.extraConf` and `wazuh.worker.extraConf` values.
 
 ```yaml
 wazuh:

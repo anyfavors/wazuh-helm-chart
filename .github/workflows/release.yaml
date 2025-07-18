@@ -23,6 +23,21 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Bump chart version
+        if: github.actor != 'github-actions[bot]'
+        env:
+          FILE: charts/wazuh/Chart.yaml
+        run: |
+          current=$(grep '^version:' "$FILE" | awk '{print $2}')
+          IFS='.' read -r major minor patch <<< "$current"
+          patch=$((patch + 1))
+          new_version="$major.$minor.$patch"
+          sed -i "s/^version:.*/version: $new_version/" "$FILE"
+          sed -i "s/Version-$current/Version-$new_version/" README.md charts/wazuh/README.md
+          git add "$FILE" README.md charts/wazuh/README.md
+          git commit -m "ci: bump chart version to $new_version"
+          git push
       
       
       - name: Run chart-releaser
