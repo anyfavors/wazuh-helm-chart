@@ -44,6 +44,11 @@ spec:
             secretName: wazuh-authd-pass
         - name: result-config
           emptyDir: {}
+        {{- if .Values.analysisd.compatArConf }}
+        - name: arconf
+          configMap:
+            name: {{ include "wazuh.fullname" . }}-arconf
+        {{- end }}
       {{ with .Values.imagePullSecrets -}}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -136,6 +141,11 @@ spec:
             - name: {{ include "wazuh.fullname" . }}-manager-master
               mountPath: /var/lib/filebeat
               subPath: filebeat/var/lib/filebeat
+            {{- if .Values.analysisd.compatArConf }}
+            - name: arconf
+              mountPath: /var/ossec/etc/shared/ar.conf
+              subPath: ar_disabled.conf
+            {{- end }}
           ports:
             - containerPort: {{ .Values.wazuh.master.service.ports.registration }}
               name: registration
