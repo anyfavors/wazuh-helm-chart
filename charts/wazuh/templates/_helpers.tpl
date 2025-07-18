@@ -400,9 +400,6 @@ uiSettings.overrides.defaultRoute: /app/wz-home
 #
 # This file will not be overwritten during upgrades.
 vulnerability-detection.disable_scan_manager=0
-{{- if .Values.analysisd.compatArConf }}
-analysisd.ar_disabled=1
-{{- end }}
 {{- end }}
 
 {{/* Snippet for the configuration file used by wazuh worker */}}
@@ -765,9 +762,6 @@ analysisd.ar_disabled=1
 #
 # This file will not be overwritten during upgrades.
 vulnerability-detection.disable_scan_manager=0
-{{- if .Values.analysisd.compatArConf }}
-analysisd.ar_disabled=1
-{{- end }}
 {{- end }}
 
 {{- define "wazuh.indexer.opensearchConfig" }}
