@@ -6,8 +6,6 @@ fullnameOverride: null
 
 imagePullSecrets: []
 
-analysisd:
-  compatArConf: true
 
 # Kibana for elasticsearch with Wazuh plugins pre-installed
 dashboard:

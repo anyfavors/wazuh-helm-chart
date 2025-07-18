@@ -49,11 +49,6 @@ spec:
             secretName: filebeat-tls
         - name: result-config
           emptyDir: {}
-        {{- if .Values.analysisd.compatArConf }}
-        - name: arconf
-          configMap:
-            name: {{ include "wazuh.fullname" . }}-arconf
-        {{- end }}
       securityContext:
         fsGroup: 101
       {{ with .Values.imagePullSecrets -}}
@@ -143,11 +138,6 @@ spec:
             - name: {{ include "wazuh.fullname" . }}-manager-worker
               mountPath: /var/lib/filebeat
               subPath: filebeat/var/lib/filebeat
-            {{- if .Values.analysisd.compatArConf }}
-            - name: arconf
-              mountPath: /var/ossec/etc/shared/ar.conf
-              subPath: ar_disabled.conf
-            {{- end }}
           ports:
             - containerPort: {{ .Values.wazuh.worker.service.ports.agentEvents }}
               name: agents-events
