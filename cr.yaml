@@ -1,4 +1,4 @@
-# cr.yaml
+# cr.yaml .
 # Set to true for GPG signing
 owner: anyfavors
 git-repo: wazuh-helm-chart
